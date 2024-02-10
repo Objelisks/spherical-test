@@ -4,3 +4,44 @@ Spherical Code Test!
 
 https://sphericalstudio.notion.site/Senior-Software-Engineer-Challenge-2024-c554c08ecca84870bdabba29ea949eea
 https://www.catalystcalifornia.org/campaign-tools/maps-and-data/justice-equity-need-index
+
+https://docs.mapbox.com/mapbox-gl-js/guides/
+
+https://data.lacounty.gov/
+
+
+time spent
+===
+
+- starting research 3:48pm friday
+- took a break, starting again at 4:25
+- start coding 4:30
+
+
+
+data
+===
+organized by zip
+
+indicators:
+- Adult Probation
+- Youth Probation
+- Black, Latinx, AIAN, and NHPI Percentages of Population
+- Unemployment Rate
+- Population aged 25+ without a High School Diploma
+- Population below 200% of the Federal Poverty Level
+- Violent Crime Rate
+- Mental Health Hospitalizations
+- Substance Use-Related Hospitalizations
+
+how it can be used:
+- Identify the highest need communities at a ZIP Code level and within the new supervisorial districts and service planning areas. 
+- View the Index through three main components, Inequity Drivers, Criminalization Risk, and System Involvement, and their respective indicators to evaluate drivers of need. 
+- Use the JENI downloadable data to examine further the areas in need of greater investment and community-based services.
+
+
+extra credit ideas
+===
+
+map representative residences
+price of rent
