@@ -13,9 +13,26 @@ https://data.lacounty.gov/
 time spent
 ===
 
-- starting research 3:48pm friday
-- took a break, starting again at 4:25
+- spent abt 30 min researching data and mapbox
 - start coding 4:30
+- map renders 4:56
+- 
+
+
+objectives
+===
+Objective 1: Make it Work - 2hrs
+- Users see a full-screen map containing LA County on page load
+- Users can visualize LA County’s JENI data
+- Users can click on each zip code to reveal its attributes
+Objective 2: Make it Last - 1hr
+Objective 3: Make it Yours - 1hr
+
+project
+===
+
+preact on vite
+mapboxgl for all the mappy stuff
 
 
 
