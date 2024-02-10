@@ -14,9 +14,15 @@ time spent
 ===
 
 - spent abt 30 min researching data and mapbox
-- start coding 4:30
+- start coding 4:30pm
 - map renders 4:56
-- 
+- cleanup
+- take a break at 5:08
+
+- starting up again 10:10am
+- added la county boundary and jeni zip code data to mapbox studio
+  - putting jeni below water so it conforms to land edges
+- imported sources and added layers 10:40
 
 
 objectives
@@ -33,7 +39,7 @@ project
 
 preact on vite
 mapboxgl for all the mappy stuff
-
+d3 for geojson? does mapbox do a good enough job?
 
 
 data
