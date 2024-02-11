@@ -14,7 +14,7 @@ time spent
 ===
 
 - spent abt 30 min researching data and mapbox
-- start coding 4:30pm
+- start coding 4:30pm friday
 - map renders 4:56
 - cleanup
 - take a break at 5:08
@@ -23,6 +23,13 @@ time spent
 - added la county boundary and jeni zip code data to mapbox studio
   - putting jeni below water so it conforms to land edges
 - imported sources and added layers 10:40
+- take a break!
+
+- start 9:00am sunday to do the rest of it!
+- want to consolidate loading data+layer into a "feature"
+- 9:37 got toggle buttons for different features working
+
+
 
 
 objectives
