@@ -35,7 +35,7 @@ time spent
 - make it last!
 - install vitest, preact testing library
 - do a typing pass on Map file 11:00pm
-- getting tests to run requires installing visual studio to get a headless gl context in node, so i'm skipping that
+- getting tests to run requires installing visual studio to get a headless gl context in node, so i'm skipping that 11:15
 
 
 
