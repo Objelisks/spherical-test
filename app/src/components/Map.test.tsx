@@ -1,6 +1,5 @@
+// @vitest-environment jsdom
 import '@testing-library/preact'
-
-// todo: configure jsdom
 
 import {expect, test } from 'vitest'
 import {render} from '@testing-library/preact'
