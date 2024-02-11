@@ -28,11 +28,13 @@ time spent
 - start 9:00am sunday to do the rest of it!
 - want to consolidate loading data+layer into a "feature"
 - 9:37 got toggle buttons for different features working
+- 10:09 got zip code highlighting working
+- end of make it work time (missing legend and zip code data on click :/)
+
 
 
 
 todo:
-mouseover zip codes
 click into zip code
 legend
 typing pass
@@ -54,7 +56,6 @@ project
 
 preact on vite
 mapboxgl for all the mappy stuff
-d3 for geojson? does mapbox do a good enough job?
 
 
 data

@@ -1,5 +1,5 @@
 import mapboxgl from 'mapbox-gl'
-import { useEffect, useRef, useState } from 'preact/hooks'
+import { useEffect, useMemo, useRef, useState } from 'preact/hooks'
 
 mapboxgl.accessToken = 'pk.eyJ1Ijoib2JqZWxpc2tzIiwiYSI6ImNsc2ZjOGtoeDBpMnIyd3BxNW8wazMwY3gifQ.oV7-f9BcvLgOHxgUKuQ9cw'
 
@@ -25,6 +25,16 @@ export function Map() {
   const [zoom, setZoom] = useState(9)
   const [viewingOptions, setViewingOptions] = useState([])
   const [hoveredPolygonId, setHoveredPolygonId] = useState(null)
+  const [clickedPolygonId, setClickedPolygonId] = useState(null)
+  const clickedPolygon = useMemo(() => mapRef.current?.querySourceFeatures('jeni-dataset',
+    {
+      filter: [
+        "in",
+        "OBJECTID",
+        clickedPolygonId
+      ]
+    })[0],
+  [clickedPolygonId])
 
   useEffect(() => {
     if (mapRef.current && hoveredPolygonId !== null) {
@@ -58,7 +68,10 @@ export function Map() {
 
     map.on('mousemove', JENI_DATASET_LAYER_ID, (e) => {
       setHoveredPolygonId(e.features.length > 0 ? e.features[0].properties.OBJECTID : null)
-      console.log(e.features[0])
+    })
+
+    map.on('mousedown', JENI_DATASET_LAYER_ID, (e) => {
+      setClickedPolygonId(e.features.length > 0 ? e.features[0].properties.OBJECTID : null)
     })
 
     map.on('load', async () => {
@@ -131,6 +144,7 @@ export function Map() {
         </div>}
       <div ref={mapContainer} className="map-container"></div>
       <div>{`lng: ${lng}, lat: ${lat}, zoom: ${zoom}`}</div>
+      {clickedPolygon && <div>{JSON.stringify(clickedPolygon)}</div>}
     </>
   )
 }
