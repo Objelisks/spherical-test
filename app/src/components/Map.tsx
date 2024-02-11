@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'preact/hooks'
 mapboxgl.accessToken = 'pk.eyJ1Ijoib2JqZWxpc2tzIiwiYSI6ImNsc2ZjOGtoeDBpMnIyd3BxNW8wazMwY3gifQ.oV7-f9BcvLgOHxgUKuQ9cw'
 
 const JENI_DATASET_LAYER_ID = 'jeni-dataset'
+const ZIPCODE_HIGHLIGHT_LAYER_ID = 'zipcode_highlight'
 
 const updateViewingLayer = (map, select, color) => {
   map.setPaintProperty(JENI_DATASET_LAYER_ID, 'fill-color', [
@@ -15,7 +16,6 @@ const updateViewingLayer = (map, select, color) => {
     100,
     color
   ])
-  console.log('update paint')
 }
 
 export function Map() {
@@ -24,6 +24,21 @@ export function Map() {
   const [[lng, lat], setCenter] = useState([-118.2024, 33.9881])
   const [zoom, setZoom] = useState(9)
   const [viewingOptions, setViewingOptions] = useState([])
+  const [hoveredPolygonId, setHoveredPolygonId] = useState(null)
+
+  useEffect(() => {
+    if (mapRef.current && hoveredPolygonId !== null) {
+      mapRef.current.setPaintProperty(ZIPCODE_HIGHLIGHT_LAYER_ID, 'line-color', [
+        "match",
+        ["get", "OBJECTID"],
+        [hoveredPolygonId],
+        "hsl(57, 78%, 66%)",
+        "hsla(0, 0%, 0%, 0)"
+      ])
+    } else if(mapRef.current && hoveredPolygonId === null) {
+      mapRef.current.setPaintProperty(ZIPCODE_HIGHLIGHT_LAYER_ID, 'line-color', "hsla(0, 0%, 0%, 0)")
+    }
+  }, [hoveredPolygonId, mapRef])
 
   // initialize the map on page load
   useEffect(() => {
@@ -39,6 +54,11 @@ export function Map() {
       const newCenter = map.getCenter()
       setCenter([newCenter.lng.toFixed(4), newCenter.lat.toFixed(4)])
       setZoom(map.getZoom().toFixed(2))
+    })
+
+    map.on('mousemove', JENI_DATASET_LAYER_ID, (e) => {
+      setHoveredPolygonId(e.features.length > 0 ? e.features[0].properties.OBJECTID : null)
+      console.log(e.features[0])
     })
 
     map.on('load', async () => {
@@ -82,6 +102,16 @@ export function Map() {
         }
       }
       map.addLayer(datasetLayer, 'water')
+
+      const zipcodeHighlightLayer = {
+        id: ZIPCODE_HIGHLIGHT_LAYER_ID,
+        type: 'line',
+        source: 'jeni-dataset',
+        paint: {
+          'line-color': "hsla(0, 0%, 0%, 0)"
+        }
+      }
+      map.addLayer(zipcodeHighlightLayer, 'road-label-simple')
 
       const vis_options = [
         {name: 'JENI Percentile', select: ["get", "jenipctl"], color: "hsl(15, 72%, 42%)"},
