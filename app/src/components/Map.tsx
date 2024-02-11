@@ -3,10 +3,13 @@ import { useEffect, useMemo, useRef, useState } from 'preact/hooks'
 
 mapboxgl.accessToken = 'pk.eyJ1Ijoib2JqZWxpc2tzIiwiYSI6ImNsc2ZjOGtoeDBpMnIyd3BxNW8wazMwY3gifQ.oV7-f9BcvLgOHxgUKuQ9cw'
 
+const JENI_DATASET_SOURCE_ID = 'jeni-dataset'
 const JENI_DATASET_LAYER_ID = 'jeni-dataset'
 const ZIPCODE_HIGHLIGHT_LAYER_ID = 'zipcode_highlight'
 
-const updateViewingLayer = (map, select, color) => {
+type ViewingOption = {name: string, select: mapboxgl.ExpressionSpecification, color: string}
+
+const updateViewingLayer = (map: mapboxgl.Map, select: mapboxgl.ExpressionSpecification, color: string) => {
   map.setPaintProperty(JENI_DATASET_LAYER_ID, 'fill-color', [
     "interpolate",
     ["linear"],
@@ -19,14 +22,14 @@ const updateViewingLayer = (map, select, color) => {
 }
 
 export function Map() {
-  const mapRef = useRef(null)
-  const mapContainer = useRef(null)
+  const mapRef = useRef<mapboxgl.Map>(null)
+  const mapContainer = useRef<HTMLDivElement>(null)
   const [[lng, lat], setCenter] = useState([-118.2024, 33.9881])
   const [zoom, setZoom] = useState(9)
-  const [viewingOptions, setViewingOptions] = useState([])
-  const [hoveredPolygonId, setHoveredPolygonId] = useState(null)
-  const [clickedPolygonId, setClickedPolygonId] = useState(null)
-  const clickedPolygon = useMemo(() => mapRef.current?.querySourceFeatures('jeni-dataset',
+  const [viewingOptions, setViewingOptions] = useState<ViewingOption[]>([])
+  const [hoveredPolygonId, setHoveredPolygonId] = useState<number>(null)
+  const [clickedPolygonId, setClickedPolygonId] = useState<number>(null)
+  const clickedPolygon = useMemo(() => mapRef.current?.querySourceFeatures(JENI_DATASET_SOURCE_ID,
     {
       filter: [
         "in",
@@ -62,8 +65,8 @@ export function Map() {
 
     map.on('move', () => {
       const newCenter = map.getCenter()
-      setCenter([newCenter.lng.toFixed(4), newCenter.lat.toFixed(4)])
-      setZoom(map.getZoom().toFixed(2))
+      setCenter([parseFloat(newCenter.lng.toFixed(4)), parseFloat(newCenter.lat.toFixed(4))])
+      setZoom(parseFloat(map.getZoom().toFixed(2)))
     })
 
     map.on('mousemove', JENI_DATASET_LAYER_ID, (e) => {
@@ -93,15 +96,15 @@ export function Map() {
       'road-label-simple')
 
       const JENIDataset = await (await fetch('Justice_Equity_Need_Index_(zip_code).geojson')).json()
-      map.addSource('jeni-dataset', {
+      map.addSource(JENI_DATASET_SOURCE_ID, {
         type: 'geojson',
         data: JENIDataset
       })
 
-      const datasetLayer = {
+      const datasetLayer: mapboxgl.FillLayer = {
         id: JENI_DATASET_LAYER_ID,
         type: 'fill',
-        source: 'jeni-dataset',
+        source: JENI_DATASET_SOURCE_ID,
         paint: {
           'fill-color': [
             "interpolate",
@@ -116,10 +119,10 @@ export function Map() {
       }
       map.addLayer(datasetLayer, 'water')
 
-      const zipcodeHighlightLayer = {
+      const zipcodeHighlightLayer: mapboxgl.LineLayer = {
         id: ZIPCODE_HIGHLIGHT_LAYER_ID,
         type: 'line',
-        source: 'jeni-dataset',
+        source: JENI_DATASET_SOURCE_ID,
         paint: {
           'line-color': "hsla(0, 0%, 0%, 0)"
         }

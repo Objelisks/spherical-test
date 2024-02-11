@@ -30,14 +30,22 @@ time spent
 - 9:37 got toggle buttons for different features working
 - 10:09 got zip code highlighting working
 - end of make it work time (missing legend and zip code data on click :/)
+- snuck in zip code data display (json.stringify) 10:18
+
+- make it last!
 
 
 
 
 todo:
-click into zip code
 legend
+make it stop highlighting on mouseleave
+
 typing pass
+refactoring
+tests
+documentation
+
 cool fly zoom
 representative residences
 
