@@ -36,17 +36,19 @@ time spent
 - install vitest, preact testing library
 - do a typing pass on Map file 11:00pm
 - getting tests to run requires installing visual studio to get a headless gl context in node, so i'm skipping that 11:15
+- comments pass 11:22
+- taking a break
+
+- make it yours
+- starting 3:11pm
+
+
 
 
 
 todo:
 legend
 make it stop highlighting on mouseleave
-
-typing pass
-refactoring
-tests
-documentation
 
 cool fly zoom
 representative residences

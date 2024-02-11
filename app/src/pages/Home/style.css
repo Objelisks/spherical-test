@@ -8,3 +8,7 @@
 	height: 800px;
 	margin: auto;
 }
+
+.controls {
+	display: grid;
+}
