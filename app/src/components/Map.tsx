@@ -138,17 +138,22 @@ export function Map() {
 
   return (
     <>
-      {activeDataset && <h1>{activeDataset.name}</h1>}
+      {activeDataset && <span className="dataset-name">{activeDataset.name}</span>}
       <div className="controls">
-        {datasets.map(dataset => <button onClick={() => switchDataset(dataset)}>{dataset.name}</button>)}
+        <div className="datasets">
+          {datasets.map(dataset => <button className="dataset" onClick={() => switchDataset(dataset)}>{dataset.name}</button>)}
+        </div>
         {activeDataset && viewingOptions.length > 0 && 
-          <div>{viewingOptions.map(option =>
-            <button onClick={() => updateViewingLayer(mapRef.current, activeDataset, option.select, option.color)}>{option.name}</button>)}
-          </div>}
+          <div className="features">
+            <div>{viewingOptions.map(option =>
+              <button className="feature" onClick={() => updateViewingLayer(mapRef.current, activeDataset, option.select, option.color)}>{option.name}</button>)}
+            </div>
+          </div>
+        }
       </div>
+      <div className="location">{`longitude: ${lng}, latitude: ${lat}, zoom: ${zoom}`}</div>
+      {clickedPolygon && <div className="zip-data">{JSON.stringify(clickedPolygon)}</div>}
       <div ref={mapContainer} className="map-container"></div>
-      <div>{`lng: ${lng}, lat: ${lat}, zoom: ${zoom}`}</div>
-      {clickedPolygon && <div>{JSON.stringify(clickedPolygon)}</div>}
     </>
   )
 }
