@@ -48,6 +48,19 @@ export const loadJESIDataset = async (): Promise<DatasetType> => {
       {name: 'Prevention and Intervention', select: ["get", "prevenpctl"], color: "hsl(255, 72%, 42%)"},
       {name: 'Housing and Employment', select: ["get", "housepctl"], color: "hsl(66, 72%, 42%)"},
       {name: 'Health and Wellness', select: ["get", "healthpctl"], color: "hsl(66, 72%, 42%)"}
-    ]
+    ],
+    renderZipcodeData: (data) => {
+      return <div className="zip-data">
+        <span>Zipcode: {data.zip}</span>
+        <span>Neighborhood: {data.neighborhood}</span>
+        <span>District: {data.sup_district}</span>
+        <span>JESI Category: {data.jesicategory}</span>
+        <span>Percentile: {data.jesipctl}%</span>
+        <span>Rank: {data.jesirank}</span>
+        <span>Prevention and Intervention: {data.prevenpctl.toFixed(2)}% ({data.prevencategory})</span>
+        <span>Housing and Employment: {data.housepctl.toFixed(2)}% ({data.housecategory})</span>
+        <span>Health and Wellness: {data.healthpctl.toFixed(2)}% ({data.healthcategory})</span>
+      </div>
+    }
   }
 }

@@ -48,6 +48,18 @@ export const loadJENIDataset = async (): Promise<DatasetType> => {
       {name: 'System Involvement', select: ["get", "systempctl"], color: "hsl(164, 72%, 42%)"},
       {name: 'Inequity Drivers', select: ["get", "driverspctl"], color: "hsl(255, 72%, 42%)"},
       {name: 'Criminalization Risk', select: ["get", "riskpctl"], color: "hsl(66, 72%, 42%)"}
-    ]
+    ],
+    renderZipcodeData: (data) => {
+      return <div className="zip-data">
+        <span>Zipcode: {data.zip}</span>
+        <span>Neighborhood: {data.neighborhood}</span>
+        <span>District: {data.sup_district}</span>
+        <span>Percentile: {data.jenipctl.toFixed(2)}% ({data.jenicategory})</span>
+        <span>Rank: {data.jenirank}</span>
+        <span>System Involvement: {data.systempctl.toFixed(2)}% ({data.systemcategory})</span>
+        <span>Inequity Drivers: {data.driverspctl.toFixed(2)}% ({data.driverscategory})</span>
+        <span>Criminalization Risk: {data.riskpctl.toFixed(2)}% ({data.riskcategory})</span>
+      </div>
+    }
   }
 }

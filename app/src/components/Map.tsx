@@ -136,6 +136,8 @@ export function Map() {
     })
   })
 
+  console.log()
+
   return (
     <>
       {activeDataset && <span className="dataset-name">{activeDataset.name}</span>}
@@ -152,7 +154,7 @@ export function Map() {
         }
       </div>
       <div className="location">{`longitude: ${lng}, latitude: ${lat}, zoom: ${zoom}`}</div>
-      {clickedPolygon && <div className="zip-data">{JSON.stringify(clickedPolygon)}</div>}
+      {clickedPolygon && activeDataset.renderZipcodeData(clickedPolygon.properties)}
       <div ref={mapContainer} className="map-container"></div>
     </>
   )

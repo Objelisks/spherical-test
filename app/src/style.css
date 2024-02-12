@@ -72,8 +72,10 @@ button {
 	position: absolute;
 	top: 1em;
 	right: 1em;
-	width: 600px;
-	height: 600px;
+	width: 300px;
+	height: 300px;
+	display: flex;
+	flex-direction: column;
 	overflow: scroll;
 	background-color: #222;
 	border: #555;
